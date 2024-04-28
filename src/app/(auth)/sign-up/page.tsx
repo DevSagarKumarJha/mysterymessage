@@ -47,7 +47,7 @@ function page() {
         description: response.data.message
       })
 
-      router.replace(`/verify/${username}`)
+      router.replace(`/verify-code/${username}`)
       setIsSubmitting(false)
     } catch (error) {
       console.error("Error in signup of user", error)
@@ -91,7 +91,7 @@ function page() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+      <div className="w-full max-w-md p-8 space-y-3 bg-white rounded-lg shadow-md">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold tracking-tighter lg:text-5xl mb-6">
             Join Mystery Message
@@ -101,7 +101,7 @@ function page() {
         </div>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} space-y-6>
+          <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)} space-y-6>
             <FormField
               control={form.control}
               name="username"
