@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/options";
 import { User } from "next-auth";
 import dbConnect from "@/lib/dbConnect";
-import UserModel from "@/models/User";
+import UserModel from "@/model/User";
 
 
 export async function POST(request: Request) {
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
                     updatedUser
                 },
                 {
-                    status: 401
+                    status: 200
                 }
             )
     } catch (error) {
@@ -122,7 +122,7 @@ export async function GET(request: Request) {
             }
         )
     } catch (error) {
-        console.log("Failed to get status of accept messages",error)
+        console.log("Failed to get status of accept messages", error)
         return Response.json(
             {
                 success: false,

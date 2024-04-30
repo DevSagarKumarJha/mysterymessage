@@ -1,18 +1,18 @@
 import dbConnect from "@/lib/dbConnect";
-import UserModel from "@/models/User";
+import UserModel from "@/model/User";
 import { date } from "zod";
 
 export async function POST(request: Request) {
     await dbConnect();
 
     try {
-        const {username, code} = await request.json()
+        const { username, code } = await request.json()
         const decodedUsername = decodeURIComponent(username)
 
 
-        const user = await UserModel.findOne({username: decodedUsername});
+        const user = await UserModel.findOne({ username: decodedUsername });
 
-        if(!user){
+        if (!user) {
             return Response.json({
                 success: false,
                 message: "User not found"
@@ -23,9 +23,9 @@ export async function POST(request: Request) {
         }
 
         const isCodeValid = user.verifyCode === code
-        const isCodeNotExpired = new Date(user.verifyCodeExpiry)> new Date()
+        const isCodeNotExpired = new Date(user.verifyCodeExpiry) > new Date()
 
-        if(isCodeValid && isCodeNotExpired){
+        if (isCodeValid && isCodeNotExpired) {
             user.isVerified = true
             // user.verifyCode=""
             // user.verifyCodeExpiry= new Date()
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
             }
             )
         }
-        else if(!isCodeNotExpired){
+        else if (!isCodeNotExpired) {
             return Response.json({
                 success: false,
                 message: "Verification code has expired please register again"
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
             }
             )
         }
-        else{
+        else {
             return Response.json({
                 success: false,
                 message: "Invalid verification code"

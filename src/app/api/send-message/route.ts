@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/dbConnect";
-import UserModel, { Message } from "@/models/User";
+import UserModel, { Message } from "@/model/User";
 
 export async function POST(request: Request) {
     await dbConnect();
@@ -38,7 +38,7 @@ export async function POST(request: Request) {
         }
 
         user.messages.push(newMessage as Message)
-
+        await user.save()
         return Response.json(
             {
                 success: true,

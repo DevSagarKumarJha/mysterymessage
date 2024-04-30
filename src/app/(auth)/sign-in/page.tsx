@@ -72,7 +72,7 @@ function page() {
         </div>
 
         <Form {...form}>
-          <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)} space-y-6>
+          <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>
 
             <FormField
               control={form.control}
